@@ -23,6 +23,12 @@ const router = createRouter({
 
       component: () => import("../views/TestView.vue"),
     },
+    {
+      path: "/naive",
+      name: "TestUI",
+
+      component: () => import("../views/UiPage.vue"),
+    },
   ],
 });
 
