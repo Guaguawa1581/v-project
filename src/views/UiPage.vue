@@ -25,6 +25,12 @@
 
       <div class="guagua bbb">Guagua BB</div>
     </div>
+    <div>
+      <n-input />
+      <n-input-number></n-input-number>
+      <n-date-picker></n-date-picker>
+      <n-time-picker></n-time-picker>
+    </div>
   </div>
 </template>
 <script setup>
@@ -57,9 +63,7 @@ import {
 //   }
 // }
 
-:not([class*="nobb"]) {
-  .bbb:not(.guagua) {
-    color: blue !important;
-  }
+:not([class*="nobb"]) > .bbb:not(.guagua) {
+  color: blue !important;
 }
 </style>
