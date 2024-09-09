@@ -1,6 +1,27 @@
 <template>
   <div class="box">
-    <div class="nobb innerBox">
+    <!-- <TestSoltBox>
+      <template #boxSolt>
+        <button>wowowo</button>
+      </template>
+    </TestSoltBox> -->
+    <div style="margin-top: 50px">
+      <div>{{ UserInfo }}</div>
+      <div>
+        <Checkbox :value="true" />
+      </div>
+      <!-- <TestSoltBox>
+        <template #boxAll>
+          <TestSlot>
+            <template #boxSolt>
+              <button style="background-color: lightcoral">eeeeoooo</button>
+            </template>
+          </TestSlot>
+        </template>
+      </TestSoltBox>
+      <DataTable /> -->
+    </div>
+    <!-- <div class="nobb innerBox">
       <div class="bbb">NoBB~~</div>
       <div class="guagua bbb">NoBB~~ GGGua</div>
     </div>
@@ -24,13 +45,7 @@
       </div>
 
       <div class="guagua bbb">Guagua BB</div>
-    </div>
-    <div>
-      <n-input />
-      <n-input-number></n-input-number>
-      <n-date-picker></n-date-picker>
-      <n-time-picker></n-time-picker>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup>
@@ -42,6 +57,13 @@ import {
   NDatePicker,
   NTimePicker,
 } from "naive-ui";
+import TestSoltBox from "@/components/TestSoltBox.vue";
+import TestSlot from "@/components/TestSlot.vue";
+import DataTable from "primevue/datatable";
+import Checkbox from "primevue/checkbox";
+import { useUserStore } from "@/store";
+
+const UserInfo = useUserStore();
 </script>
 <style lang="scss" scoped>
 .box {
@@ -63,7 +85,9 @@ import {
 //   }
 // }
 
-:not([class*="nobb"]) > .bbb:not(.guagua) {
-  color: blue !important;
+:not([class*="nobb"]) {
+  & > .bbb:not(.guagua) {
+    color: blue !important;
+  }
 }
 </style>
