@@ -1,18 +1,24 @@
 <template>
-  <button id="counter" @click="increment">{{ count }}</button>
-  <div class="btnBox"><button @click="clearDate">clear date</button></div>
   <div>
-    <NDatePicker
-      class="input-box-date w-100"
-      v-model:formatted-value="date"
-      value-format="yyyy-MM-dd'T'HH:mm:ss"
-      type="datetime"
-      clearable
-      update-value-on-close
-    />
+    <button id="counter" @click="increment">{{ count }}</button>
+    <div class="btnBox"><button @click="clearDate">clear date</button></div>
+    <div>
+      <NDatePicker
+        class="input-box-date w-100"
+        v-model:formatted-value="date"
+        value-format="yyyy-MM-dd'T'HH:mm:ss"
+        type="datetime"
+        clearable
+        update-value-on-close
+      />
+    </div>
+    <div>
+      <Paginator :rows="10" :totalRecords="120"></Paginator>
+    </div>
   </div>
 </template>
 <script setup>
+import Paginator from "primevue/paginator";
 import { ref, nextTick } from "vue";
 import { NDatePicker } from "naive-ui";
 const count = ref(0);
