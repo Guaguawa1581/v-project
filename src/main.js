@@ -23,8 +23,8 @@ const primaryColor = [
       700: "#c2410c",
       800: "#9a3412",
       900: "#7c2d12",
-      950: "#431407",
-    },
+      950: "#431407"
+    }
   },
   {
     name: "blue",
@@ -39,9 +39,9 @@ const primaryColor = [
       700: "#1d4ed8",
       800: "#1e40af",
       900: "#1e3a8a",
-      950: "#172554",
-    },
-  },
+      950: "#172554"
+    }
+  }
 ];
 const MyPreset = definePreset(Aura, {
   semantic: {
@@ -53,31 +53,31 @@ const MyPreset = definePreset(Aura, {
           color: "{primary.500}",
           contrastColor: "#ffffff",
           hoverColor: "{primary.600}",
-          activeColor: "{primary.700}",
+          activeColor: "{primary.700}"
         },
         highlight: {
           background: "{primary.50}",
           focusBackground: "{primary.100}",
           color: "{primary.700}",
-          focusColor: "{primary.800}",
-        },
+          focusColor: "{primary.800}"
+        }
       },
       dark: {
         primary: {
           color: "{primary.400}",
           contrastColor: "{surface.900}",
           hoverColor: "{primary.300}",
-          activeColor: "{primary.200}",
+          activeColor: "{primary.200}"
         },
         highlight: {
           background: "color-mix(in srgb, {primary.400}, transparent 84%)",
           focusBackground: "color-mix(in srgb, {primary.400}, transparent 76%)",
           color: "rgba(255,255,255,.87)",
-          focusColor: "rgba(255,255,255,.87)",
-        },
-      },
-    },
-  },
+          focusColor: "rgba(255,255,255,.87)"
+        }
+      }
+    }
+  }
 });
 
 const app = createApp(App);
@@ -93,9 +93,9 @@ app.use(PrimeVue, {
     options: {
       prefix: "p", //same as default
       darkModeSelector: ".app-dark",
-      cssLayer: false, //default
-    },
-  },
+      cssLayer: false //default
+    }
+  }
 });
 
 app.mount("#app");

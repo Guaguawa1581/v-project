@@ -9,6 +9,9 @@
       <div>{{ UserInfo }}</div>
       <div>
         <Checkbox :value="true" />
+        <span>
+          <i class="fa-brands fa-tiktok"></i>
+        </span>
       </div>
       <!-- <TestSoltBox>
         <template #boxAll>
