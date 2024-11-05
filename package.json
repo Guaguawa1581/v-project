@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve": "vite"
   },
   "dependencies": {
+    "@primevue/themes": "^4.0.5",
     "@vicons/ionicons5": "^0.12.0",
     "@vicons/material": "^0.12.0",
     "axios": "^1.2.1",
@@ -19,7 +21,7 @@
     "moment": "^2.29.4",
     "naive-ui": "^2.39.0",
     "pinia": "^2.2.2",
-    "primeicons": "^6.0.1",
+    "primeicons": "^7.0.0",
     "primevue": "^4.0.5",
     "vit": "^0.0.1",
     "vue": "^3.2.13",

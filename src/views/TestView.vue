@@ -13,7 +13,17 @@
       />
     </div>
     <div>
-      <Paginator :rows="10" :totalRecords="120"></Paginator>
+      <Paginator
+        :template="{
+          default:
+            'FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink JumpToPageDropdown JumpToPageInput',
+        }"
+        :rows="10"
+        :totalRecords="120"
+        :pageLinkSize="2"
+        class=""
+      >
+      </Paginator>
     </div>
   </div>
 </template>
