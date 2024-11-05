@@ -1,0 +1,87 @@
+[33mcommit ae463962b7798025f2e4bdd2bd06d66ca27b4cd5[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Guaguagugu <batato4ni@gmail.com>
+Date:   Tue Nov 5 20:33:35 2024 +0800
+
+    gogogo
+
+[33mcommit 2ac1849c7582bc13b426eb6d7b62aaa61be9515b[m
+Merge: dee1fd5 c46f86c
+Author: Guaguagugu <batato4ni@gmail.com>
+Date:   Thu Oct 31 16:29:39 2024 +0800
+
+    Merge branch 'main' of https://github.com/Guaguawa1581/v-project
+
+[33mcommit c46f86ca07959b9323f971db63d718eb3a86f6d3[m
+Merge: d7f1ce0 5c3a201
+Author: workingPC_Impelex <franktsai0624@gmail.com>
+Date:   Wed Sep 18 11:24:18 2024 +0800
+
+    Merge branch 'main' of https://github.com/Guaguawa1581/v-project
+
+[33mcommit d7f1ce064d9608607f46dee3ff9259b3aef79d76[m
+Author: workingPC_Impelex <franktsai0624@gmail.com>
+Date:   Wed Sep 18 11:24:13 2024 +0800
+
+    eeeeeeeeeeeeeeeeeee
+
+[33mcommit dee1fd5dfe904d42deb9656b07d2f711eed05dbc[m
+Author: Guaguagugu <batato4ni@gmail.com>
+Date:   Tue Sep 10 00:48:11 2024 +0800
+
+    fix naive valid
+
+[33mcommit 5c3a20156c0ffdf1f4b6e1536b01c78fa874229b[m
+Merge: 43b3545 b510ca2
+Author: Guaguagugu <batato4ni@gmail.com>
+Date:   Mon Sep 9 22:15:00 2024 +0800
+
+    Merge branches 'main' and 'main' of https://github.com/Guaguawa1581/v-project
+
+[33mcommit 43b3545f79437d0ba50d4833752ea42a312be3cd[m
+Author: Guaguagugu <batato4ni@gmail.com>
+Date:   Fri Sep 6 23:12:05 2024 +0800
+
+    before merge
+
+[33mcommit b510ca2c9cee2095c6527f4c0bbf49d61dcc1794[m
+Author: workingPC_Impelex <franktsai0624@gmail.com>
+Date:   Wed Sep 4 17:11:57 2024 +0800
+
+    pinia test
+
+[33mcommit 977b9181ca94cff0994ece9e349c915f888099bd[m
+Merge: 9a98602 184464e
+Author: Guaguagugu <batato4ni@gmail.com>
+Date:   Sat Aug 24 02:10:57 2024 +0800
+
+    Merge branch 'main' of https://github.com/Guaguawa1581/v-project
+
+[33mcommit 9a98602a40d6371fbbaf501f31a4327101d01ea3[m
+Author: Guaguagugu <batato4ni@gmail.com>
+Date:   Sat Aug 24 02:10:07 2024 +0800
+
+    eiefjiejf
+
+[33mcommit 184464eb9dc94d6b6d6cd94908587ce67ed92454[m
+Author: workingPC_Impelex <franktsai0624@gmail.com>
+Date:   Fri Aug 23 17:21:51 2024 +0800
+
+    0823test
+
+[33mcommit d8ecc6109d445def5439e2f818045f2b962d7d90[m
+Author: workingPC_Impelex <franktsai0624@gmail.com>
+Date:   Fri Aug 16 17:11:42 2024 +0800
+
+    0816
+
+[33mcommit fafba07dbde5bb208c0a1550c2ed2548448aa938[m
+Author: Guaguagugu <batato4ni@gmail.com>
+Date:   Tue Aug 6 01:38:41 2024 +0800
+
+    create vue project
+
+[33mcommit 2217f00f1a2eb12089e6dc9ccb636828a854da62[m
+Author: Guaguawa1581 <98073400+Guaguawa1581@users.noreply.github.com>
+Date:   Tue Aug 6 00:57:10 2024 +0800
+
+    Initial commit

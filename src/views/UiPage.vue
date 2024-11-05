@@ -6,7 +6,22 @@
       </template>
     </TestSoltBox> -->
     <div style="margin-top: 50px">
-      <div>{{ UserInfo }}</div>
+      <div>{{ store.userInfo }}</div>
+      <div>
+        <Button @click="toggleLoading">change loading</Button>
+        <Button class="mx-3" severity="warn" @click="toggleLoadingCom"
+          >change loading Com</Button
+        >
+      </div>
+      <div class="my-3 loadingBox" :class="store.isLoading ? 'bg-blue' : ''">
+        {{ store.isLoading }}
+      </div>
+      <div class="my-34">
+        <h3>hello_vue使用這個 compositionAPI</h3>
+        <div class="loadingBox" :class="storeCom.isLoading ? 'bg-red' : ''">
+          {{ storeCom.isLoading + " CCCCom" }}
+        </div>
+      </div>
       <div>
         <Checkbox :value="true" />
         <span>
@@ -52,7 +67,7 @@
   </div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import {
   NInputGroup,
   NInput,
@@ -64,9 +79,18 @@ import TestSoltBox from "@/components/TestSoltBox.vue";
 import TestSlot from "@/components/TestSlot.vue";
 import DataTable from "primevue/datatable";
 import Checkbox from "primevue/checkbox";
-import { useUserStore } from "@/store";
+import Button from "primevue/button";
+import { useUserStoreCom, useUserStore } from "@/store/user";
+const storeCom = useUserStoreCom();
+const store = useUserStore();
 
-const UserInfo = useUserStore();
+const toggleLoadingCom = () => {
+  storeCom.setIsLoading(!storeCom.isLoading);
+};
+const toggleLoading = () => {
+  console.log(store.isLoading);
+  store.setIsLoading(!store.isLoading);
+};
 </script>
 <style lang="scss" scoped>
 .box {
@@ -75,6 +99,19 @@ const UserInfo = useUserStore();
   & > div {
     margin-bottom: 20px;
   }
+}
+.loadingBox {
+  box-sizing: border-box;
+  border: 2px solid rgb(48, 48, 48);
+  width: 200px;
+  height: 200px;
+  background: rgb(247, 247, 139);
+}
+.bg-blue {
+  background-color: lightskyblue;
+}
+.bg-red {
+  background-color: lightcoral;
 }
 </style>
 <style lang="scss">
@@ -92,5 +129,14 @@ const UserInfo = useUserStore();
   & > .bbb:not(.guagua) {
     color: blue !important;
   }
+}
+.py-3 {
+  padding: 60px 0;
+}
+.mx-3 {
+  margin: 0 60px;
+}
+.my-3 {
+  margin: 60px 0;
 }
 </style>
