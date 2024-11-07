@@ -1,21 +1,24 @@
+<template>
+  <n-message-provider>
+    <header>
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/test">Testtt</RouterLink>
+        <RouterLink to="/naive">Naive UI</RouterLink>
+      </nav>
+    </header>
+    <div class="container">
+      <RouterView />
+    </div>
+  </n-message-provider>
+</template>
 <script setup>
+import { onMounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
+import { NMessageProvider } from "naive-ui";
 import HelloWorld from "./components/HelloWorld.vue";
 </script>
-
-<template>
-  <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-      <RouterLink to="/test">Testtt</RouterLink>
-      <RouterLink to="/naive">Naive UI</RouterLink>
-    </nav>
-  </header>
-  <div class="container">
-    <RouterView />
-  </div>
-</template>
 
 <style scoped>
 .container {

@@ -1,142 +1,146 @@
 <template>
-  <div class="box">
-    <!-- <TestSoltBox>
-      <template #boxSolt>
-        <button>wowowo</button>
-      </template>
-    </TestSoltBox> -->
-    <div style="margin-top: 50px">
-      <div>{{ store.userInfo }}</div>
-      <div>
-        <Button @click="toggleLoading">change loading</Button>
-        <Button class="mx-3" severity="warn" @click="toggleLoadingCom"
-          >change loading Com</Button
-        >
-      </div>
-      <div class="my-3 loadingBox" :class="store.isLoading ? 'bg-blue' : ''">
-        {{ store.isLoading }}
-      </div>
-      <div class="my-34">
-        <h3>hello_vue使用這個 compositionAPI</h3>
-        <div class="loadingBox" :class="storeCom.isLoading ? 'bg-red' : ''">
-          {{ storeCom.isLoading + " CCCCom" }}
-        </div>
-      </div>
-      <div>
-        <Checkbox :value="true" />
-        <span>
-          <i class="fa-brands fa-tiktok"></i>
-        </span>
-      </div>
-      <!-- <TestSoltBox>
-        <template #boxAll>
-          <TestSlot>
-            <template #boxSolt>
-              <button style="background-color: lightcoral">eeeeoooo</button>
-            </template>
-          </TestSlot>
-        </template>
-      </TestSoltBox>
-      <DataTable /> -->
-    </div>
-    <!-- <div class="nobb innerBox">
-      <div class="bbb">NoBB~~</div>
-      <div class="guagua bbb">NoBB~~ GGGua</div>
-    </div>
-    <div class="innerBox" style="margin-top: 100px">
-      <div class="bbb">BB BBBBBB</div>
-      <div class="guagua bbb">Guagua BB</div>
-    </div>
-    <div class="" style="margin-top: 100px">
-      <div>No InnerBox</div>
-      <div class="bbb">BB BBBBBB</div>
-      <div class="guagua bbb">Guagua BB</div>
-    </div>
-    <div class="" style="margin-top: 100px">
-      <div>LLLLLOOOO</div>
-      <div class="nobb">
-        <div class="kkd">
-          <div class="ooeoeo">
-            <div class="bbb">BB BBBBBB</div>
-          </div>
-        </div>
-      </div>
+  <n-form :model="form" :rules="rules" ref="formRef">
+    <n-grid :x-gap="12" :y-gap="12" responsive="screen">
+      <n-gi :span="24" :xs="24" :sm="24" :md="12" :lg="12">
+        <n-input-group>
+          <n-input-group-label round>https://www.</n-input-group-label>
+          <n-input :style="{ width: '33%' }" />
+          <n-input-group-label round>.com</n-input-group-label>
+        </n-input-group>
+      </n-gi>
+      <n-gi :span="24" :xs="24" :sm="24" :md="12" :lg="12">
+        <n-form-item label="Name" path="name">
+          <n-input-group round>
+            <n-input
+              round
+              v-model:value="form.name"
+              placeholder="Enter your name"
+            />
 
-      <div class="guagua bbb">Guagua BB</div>
-    </div> -->
-  </div>
+            <n-input-group-label round>Label</n-input-group-label>
+            <n-button round>+</n-button>
+          </n-input-group>
+        </n-form-item>
+      </n-gi>
+      <n-gi :span="24" :xs="24" :sm="24" :md="12" :lg="12">
+        <n-form-item label="Email" path="email">
+          <n-input-group>
+            <n-input
+              v-model:value="form.email"
+              placeholder="Enter your email"
+            />
+          </n-input-group>
+        </n-form-item>
+      </n-gi>
+      <n-gi :span="24" :xs="24" :sm="24" :md="12" :lg="12">
+        <n-form-item label="Password" path="password">
+          <n-input-group>
+            <n-input
+              type="password"
+              v-model:value="form.password"
+              placeholder="Enter your password"
+            />
+          </n-input-group>
+        </n-form-item>
+      </n-gi>
+      <n-gi :span="24">
+        <input type="text" />
+      </n-gi>
+
+      <n-gi :span="24" :xs="24" :sm="24" :md="24" :lg="24">
+        <n-button @click="handleSubmit">Submit</n-button>
+      </n-gi>
+    </n-grid>
+  </n-form>
 </template>
-<script setup>
-import { ref, computed } from "vue";
-import {
-  NInputGroup,
-  NInput,
-  NInputNumber,
-  NDatePicker,
-  NTimePicker,
-} from "naive-ui";
-import TestSoltBox from "@/components/TestSoltBox.vue";
-import TestSlot from "@/components/TestSlot.vue";
-import DataTable from "primevue/datatable";
-import Checkbox from "primevue/checkbox";
-import Button from "primevue/button";
-import { useUserStoreCom, useUserStore } from "@/store/user";
-const storeCom = useUserStoreCom();
-const store = useUserStore();
 
-const toggleLoadingCom = () => {
-  storeCom.setIsLoading(!storeCom.isLoading);
-};
-const toggleLoading = () => {
-  console.log(store.isLoading);
-  store.setIsLoading(!store.isLoading);
+<script>
+import { ref } from "vue";
+import {
+  NForm,
+  NFormItem,
+  NInput,
+  NButton,
+  NGrid,
+  NGi,
+  NInputGroup,
+  NInputGroupLabel,
+} from "naive-ui";
+
+export default {
+  components: {
+    NForm,
+    NFormItem,
+    NInput,
+    NButton,
+    NGrid,
+    NGi,
+    NInputGroup,
+    NInputGroupLabel,
+  },
+  setup() {
+    const formRef = ref(null);
+    const form = ref({
+      name: "",
+      email: "",
+      password: "",
+    });
+
+    const rules = {
+      name: {
+        required: true,
+        message: "Name is required",
+        trigger: "blur",
+      },
+      email: {
+        required: true,
+        message: "Email is required",
+        trigger: "blur",
+      },
+      password: {
+        required: true,
+        message: "Password is required",
+        trigger: "blur",
+      },
+    };
+
+    const handleSubmit = () => {
+      formRef.value.validate((err) => {
+        if (!err) {
+          window.$message.success("Form submitted successfully");
+          console.log(form.value);
+        } else {
+          window.$message.warning("Please fill in the form correctly");
+        }
+      });
+    };
+
+    return {
+      formRef,
+      form,
+      rules,
+      handleSubmit,
+    };
+  },
 };
 </script>
-<style lang="scss" scoped>
-.box {
-  display: flex;
-  flex-direction: column;
-  & > div {
-    margin-bottom: 20px;
-  }
-}
-.loadingBox {
-  box-sizing: border-box;
-  border: 2px solid rgb(48, 48, 48);
-  width: 200px;
-  height: 200px;
-  background: rgb(247, 247, 139);
-}
-.bg-blue {
-  background-color: lightskyblue;
-}
-.bg-red {
-  background-color: lightcoral;
-}
-</style>
-<style lang="scss">
-.box {
-  font-size: 30px;
-  font-weight: 800;
-}
-// *:not(.nobb) {
-//   .bbb:not(.guagua) {
-//     color: blue !important;
-//   }
-// }
 
-:not([class*="nobb"]) {
-  & > .bbb:not(.guagua) {
-    color: blue !important;
-  }
+<style scoped>
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
 }
-.py-3 {
-  padding: 60px 0;
+
+.form-group {
+  margin-bottom: 1rem;
 }
-.mx-3 {
-  margin: 0 60px;
+
+.is-invalid {
+  border-color: red;
 }
-.my-3 {
-  margin: 60px 0;
+
+span {
+  color: red;
+  font-size: 0.875rem;
 }
 </style>
