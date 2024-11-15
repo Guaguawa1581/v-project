@@ -1,60 +1,210 @@
 <template>
-  <n-form :model="form" :rules="rules" ref="formRef">
-    <n-grid :x-gap="12" :y-gap="12" responsive="screen">
-      <n-gi :span="24" :xs="24" :sm="24" :md="12" :lg="12">
-        <n-input-group>
-          <n-input-group-label round>https://www.</n-input-group-label>
-          <n-input :style="{ width: '33%' }" />
-          <n-input-group-label round>.com</n-input-group-label>
+  <n-form :model="localTargetObjectTest" ref="testFormRef">
+    <n-grid class="mYa-s2" :x-gap="12" :y-gap="12">
+      <n-gi :span="4">
+        <n-form-item
+          :path="'newField'"
+          :rule="{
+            required: true,
+            message: 'This field is required',
+            trigger: 'blur',
+          }"
+          :show-label="false"
+        >
+          <n-input-group class="input_size_free custom_inputgroup">
+            <n-input
+              v-model:value="localTargetObjectTest.newField"
+              :round="isRound"
+              class=""
+            />
+          </n-input-group>
+        </n-form-item>
+      </n-gi>
+      <n-gi :span="12">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-input-group-label :class="isRound ? 'round' : ''"
+            >WWWW</n-input-group-label
+          >
+          <n-tooltip trigger="click">
+            <template #trigger>
+              <n-button
+                type="primary"
+                :round="isRound"
+                :class="isRound ? 'round' : ''"
+                @click="() => (isRound = !isRound)"
+                >isRound</n-button
+              >
+            </template>
+            <span>Tooltip</span>
+          </n-tooltip>
         </n-input-group>
       </n-gi>
-      <n-gi :span="24" :xs="24" :sm="24" :md="12" :lg="12">
-        <n-form-item label="Name" path="name">
-          <n-input-group round>
+      <n-gi :span="4">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-button
+            type="primary"
+            :round="isRound"
+            :class="isRound ? 'round' : ''"
+            @click="() => (isRound = !isRound)"
+            >isRound</n-button
+          >
+        </n-input-group>
+      </n-gi>
+      <n-gi :span="12">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-button
+            type="primary"
+            :style="{ width: '40%' }"
+            :round="isRound"
+            :class="isRound ? 'round' : ''"
+            @click="() => (isRound = !isRound)"
+            >isRound</n-button
+          >
+          <n-input-group-label :class="isRound ? 'round' : ''"
+            >Label</n-input-group-label
+          >
+        </n-input-group>
+      </n-gi>
+      <n-gi :span="12">
+        <n-form-item
+          :path="'newGroup'"
+          :rule="[
+            {
+              validator: (rule, value) => {
+                if (value?.first !== '') {
+                  return true;
+                }
+                return false;
+              },
+
+              message: 'first is required',
+              trigger: 'blur',
+            },
+            {
+              validator: (rule, value) => {
+                if (value?.second !== '') {
+                  return true;
+                }
+                return false;
+              },
+              message: 'second is required',
+              trigger: 'blur',
+            },
+          ]"
+          :show-label="false"
+        >
+          <n-input-group class="input_size_free custom_inputgroup">
+            <n-button
+              type="primary"
+              :style="{ width: '40%' }"
+              :round="isRound"
+              :class="isRound ? 'round' : ''"
+              @click="() => (isRound = !isRound)"
+              >isRound</n-button
+            >
+
             <n-input
-              round
-              v-model:value="form.name"
-              placeholder="Enter your name"
+              :style="{ width: '20%' }"
+              :round="isRound"
+              class=""
+              v-model:value="localTargetObjectTest.newGroup.first"
             />
 
-            <n-input-group-label round>Label</n-input-group-label>
-            <n-button round>+</n-button>
-          </n-input-group>
-        </n-form-item>
-      </n-gi>
-      <n-gi :span="24" :xs="24" :sm="24" :md="12" :lg="12">
-        <n-form-item label="Email" path="email">
-          <n-input-group>
+            <n-input-group-label :class="isRound ? 'round' : ''"
+              >Label</n-input-group-label
+            >
             <n-input
-              v-model:value="form.email"
-              placeholder="Enter your email"
+              :style="{ width: '20%' }"
+              :round="isRound"
+              class=""
+              v-model:value="localTargetObjectTest.newGroup.second"
             />
           </n-input-group>
         </n-form-item>
       </n-gi>
-      <n-gi :span="24" :xs="24" :sm="24" :md="12" :lg="12">
-        <n-form-item label="Password" path="password">
-          <n-input-group>
+      <n-gi :span="12">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-form-item
+            path="firstName"
+            :show-label="false"
+            :rule="{
+              required: true,
+              message: 'This firstName is required',
+              trigger: 'blur',
+            }"
+          >
             <n-input
-              type="password"
-              v-model:value="form.password"
-              placeholder="Enter your password"
+              v-model="localTargetObjectTest.firstName"
+              placeholder="First Name"
             />
-          </n-input-group>
-        </n-form-item>
-      </n-gi>
-      <n-gi :span="24">
-        <input type="text" />
-      </n-gi>
+          </n-form-item>
 
-      <n-gi :span="24" :xs="24" :sm="24" :md="24" :lg="24">
-        <n-button @click="handleSubmit">Submit</n-button>
+          <n-form-item
+            path="lastName"
+            :show-label="false"
+            :rule="{
+              required: true,
+              message: 'This lastName is required',
+              trigger: 'blur',
+            }"
+          >
+            <n-input
+              v-model="localTargetObjectTest.lastName"
+              placeholder="Last Name"
+            />
+          </n-form-item>
+
+          <n-form-item
+            path="email"
+            :show-label="false"
+            :rule="{
+              required: true,
+              message: 'This email is required',
+              trigger: 'blur',
+            }"
+          >
+            <n-input
+              v-model="localTargetObjectTest.email"
+              placeholder="Email"
+            />
+          </n-form-item>
+        </n-input-group>
+      </n-gi>
+      <n-gi :span="4">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-input-number
+            :class="isRound ? 'round' : ''"
+            button-placement="both"
+          />
+        </n-input-group>
+      </n-gi>
+      <n-gi :span="4">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-select
+            :class="isRound ? 'round' : ''"
+            placeholder="Select"
+            :options="[
+              { label: 'Option 1', value: 'Option 1' },
+              { label: 'Option 2', value: 'Option 2' },
+            ]"
+          />
+        </n-input-group>
+      </n-gi>
+      <n-gi :span="4">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-date-picker type="date" :class="isRound ? 'round' : ''" />
+        </n-input-group>
+      </n-gi>
+      <n-gi :span="12">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-date-picker type="date" :class="isRound ? 'round' : ''" />
+        </n-input-group>
       </n-gi>
     </n-grid>
   </n-form>
 </template>
 
-<script>
+<script setup>
 import { ref } from "vue";
 import {
   NForm,
@@ -65,67 +215,67 @@ import {
   NGi,
   NInputGroup,
   NInputGroupLabel,
+  NInputNumber,
+  NSelect,
+  NAvatar,
+  NBadge,
+  NEllipsis,
+  NTooltip,
+  NDatePicker,
 } from "naive-ui";
 
-export default {
-  components: {
-    NForm,
-    NFormItem,
-    NInput,
-    NButton,
-    NGrid,
-    NGi,
-    NInputGroup,
-    NInputGroupLabel,
+const formRef = ref(null);
+const form = ref({
+  name: "",
+  email: "",
+  password: "",
+});
+const isRound = ref(false);
+const localTargetObjectTest = ref({
+  newField: "",
+  newGroup: {
+    first: "",
+    second: "",
   },
-  setup() {
-    const formRef = ref(null);
-    const form = ref({
-      name: "",
-      email: "",
-      password: "",
-    });
+  firstName: "",
+  lastName: "",
+  email: "",
+});
 
-    const rules = {
-      name: {
-        required: true,
-        message: "Name is required",
-        trigger: "blur",
-      },
-      email: {
-        required: true,
-        message: "Email is required",
-        trigger: "blur",
-      },
-      password: {
-        required: true,
-        message: "Password is required",
-        trigger: "blur",
-      },
-    };
-
-    const handleSubmit = () => {
-      formRef.value.validate((err) => {
-        if (!err) {
-          window.$message.success("Form submitted successfully");
-          console.log(form.value);
-        } else {
-          window.$message.warning("Please fill in the form correctly");
-        }
-      });
-    };
-
-    return {
-      formRef,
-      form,
-      rules,
-      handleSubmit,
-    };
+const rules = {
+  name: {
+    required: true,
+    message: "Name is required",
+    trigger: "blur",
   },
+  email: {
+    required: true,
+    message: "Email is required",
+    trigger: "blur",
+  },
+  password: {
+    required: true,
+    message: "Password is required",
+    trigger: "blur",
+  },
+};
+
+const handleSubmit = () => {
+  formRef.value.validate((err) => {
+    if (!err) {
+      window.$message.success("Form submitted successfully");
+      console.log(form.value);
+    } else {
+      window.$message.warning("Please fill in the form correctly");
+    }
+  });
 };
 </script>
 
 <style scoped>
+.n-grid {
+  background-color: lightblue;
+}
 .form-container {
   max-width: 400px;
   margin: 0 auto;
