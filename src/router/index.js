@@ -7,7 +7,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView
+      component: HomeView,
     },
     {
       path: "/about",
@@ -15,27 +15,37 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/AboutView.vue")
+      component: () => import("../views/AboutView.vue"),
     },
     {
       path: "/test",
       name: "test",
 
-      component: () => import("../views/TestView.vue")
+      component: () => import("../views/TestView.vue"),
     },
     {
       path: "/naive",
       name: "TestUI",
 
-      component: () => import("../views/UiPage.vue")
+      component: () => import("../views/UiPage.vue"),
     },
     {
       path: "/naiveTest",
       name: "NTestUI",
 
-      component: () => import("../views/TestUiPage.vue")
-    }
-  ]
+      component: () => import("../views/TestUiPage.vue"),
+    },
+    {
+      path: "/barcode",
+      name: "Barcode",
+      component: () => import("../views/BarcodeView.vue"),
+    },
+    {
+      path: "/dragTest",
+      name: "DragTest",
+      component: () => import("../views/DragView.vue"),
+    },
+  ],
 });
 
 export default router;

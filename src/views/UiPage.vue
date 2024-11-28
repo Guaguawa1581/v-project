@@ -170,12 +170,25 @@
           </n-form-item>
         </n-input-group>
       </n-gi>
-      <n-gi :span="4">
+      <n-gi :span="12">
         <n-input-group class="input_size_free custom_inputgroup">
           <n-input-number
             :class="isRound ? 'round' : ''"
             button-placement="both"
-          />
+          >
+            <template
+              v-for="(slotContent, slotName) in testSlots"
+              v-slot:[slotName]
+              :key="slotName"
+            >
+              <template v-if="typeof slotContent === 'string'">
+                {{ slotContent }}
+              </template>
+              <template v-else>
+                <component :is="slotContent" />
+              </template>
+            </template>
+          </n-input-number>
         </n-input-group>
       </n-gi>
       <n-gi :span="4">
@@ -187,6 +200,7 @@
               { label: 'Option 1', value: 'Option 1' },
               { label: 'Option 2', value: 'Option 2' },
             ]"
+            disabled
           />
         </n-input-group>
       </n-gi>
@@ -205,7 +219,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { h, ref, markRaw } from "vue";
 import {
   NForm,
   NFormItem,
@@ -223,7 +237,7 @@ import {
   NTooltip,
   NDatePicker,
 } from "naive-ui";
-
+import { Anchor } from "@vicons/fa";
 const formRef = ref(null);
 const form = ref({
   name: "",
@@ -241,7 +255,13 @@ const localTargetObjectTest = ref({
   lastName: "",
   email: "",
 });
+const dynamicIcon = markRaw(Anchor);
+const testSlots = ref({
+  // q: h("p", null, "a"),意思
 
+  "add-icon": Anchor,
+  prefix: "$$",
+});
 const rules = {
   name: {
     required: true,
@@ -259,7 +279,6 @@ const rules = {
     trigger: "blur",
   },
 };
-
 const handleSubmit = () => {
   formRef.value.validate((err) => {
     if (!err) {

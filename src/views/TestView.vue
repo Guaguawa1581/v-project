@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-box">
     <button id="counter" @click="increment">{{ count }}</button>
     <div class="btnBox"><button @click="clearDate">clear date</button></div>
     <div>
@@ -25,14 +25,37 @@
       >
       </Paginator>
     </div>
+    <div>
+      <InputOtp v-model:modelValue="tempData.otpValue" :length="otpLength" />
+    </div>
+    <div>
+      <InputMask
+        id="basic"
+        v-model="tempData.maskValue"
+        mask="9.9.9.9"
+        placeholder="0.0.0.0"
+      />
+    </div>
+    <div>
+      <button @click="updateMessage">更新訊息</button>
+      <p>{{ message }}</p>
+    </div>
   </div>
 </template>
 <script setup>
-import Paginator from "primevue/paginator";
 import { ref, nextTick } from "vue";
 import { NDatePicker } from "naive-ui";
+import Paginator from "primevue/paginator";
+import InputOtp from "primevue/inputotp";
+import InputMask from "primevue/inputmask";
 const count = ref(0);
 const date = ref("2024-12-31T00:00:00");
+const tempData = ref({
+  otpValue: "",
+  maskValue: "",
+});
+const otpValue = ref("");
+const otpLength = ref(6);
 async function increment() {
   count.value++;
 
@@ -45,9 +68,26 @@ async function increment() {
 const clearDate = () => {
   date.value = null;
 };
+
+const message = ref("初始訊息");
+
+function updateMessage() {
+  message.value = "更新後的訊息";
+
+  console.log("更新訊息後 (同步)");
+  nextTick(() => {
+    console.log("DOM 更新後 (nextTick)");
+  });
+  console.log("nextTick 後 (同步)");
+}
 </script>
 <style lang="scss" scoped>
 .btnBox {
   margin: 20px 0;
+}
+.container-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>

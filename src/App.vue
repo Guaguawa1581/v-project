@@ -6,6 +6,8 @@
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/test">Testtt</RouterLink>
         <RouterLink to="/naive">Naive UI</RouterLink>
+        <RouterLink to="/barcode">Barcode</RouterLink>
+        <RouterLink to="/dragTest">DragTest</RouterLink>
       </nav>
     </header>
     <div class="container">
