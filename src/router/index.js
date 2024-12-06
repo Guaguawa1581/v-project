@@ -45,6 +45,11 @@ const router = createRouter({
       name: "DragTest",
       component: () => import("../views/DragView.vue"),
     },
+    {
+      path: "/slotLoop",
+      name: "SlotLoop",
+      component: () => import("../views/SlotLoopView.vue"),
+    },
   ],
 });
 

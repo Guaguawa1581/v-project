@@ -13,6 +13,7 @@
     <slot></slot>
     <div
       class="gutter"
+      :class="{ active: isActive }"
       @mousedown="onGutterDragStart(index, $event)"
       @touchstart="onGutterDragStart(index, $event)"
       @dblclick="onDbClick(index, $event)"
@@ -50,7 +51,7 @@ const emit = defineEmits([
 ]);
 const tempSpan = ref(props.span);
 const numericGridCols = computed(() => Number(props.gridCols));
-
+const isActive = ref(false);
 // double tap
 const DOUBLE_TAP_THRESHOLD = 300; // 300 毫秒內的連續觸碰視為雙擊
 const DOUBLE_TAP_DISTANCE = 10; // 10 像素內的移動視為雙擊
@@ -79,6 +80,7 @@ const isDoubleTap = (event) => {
 };
 
 const onGutterDragStart = (index, event) => {
+  isActive.value = true;
   if (event.type === "touchstart") {
     event = event.touches[0];
     if (isDoubleTap(event)) {
@@ -107,6 +109,7 @@ const onGutterDragStart = (index, event) => {
   };
 
   const onMouseUp = (e) => {
+    isActive.value = false;
     if (e.type === "touchend") {
       e = e.changedTouches[0];
     }
@@ -160,20 +163,19 @@ watch(tempSpan, (newVal) => {
   border: 1px solid #ccc;
 }
 .grabArea {
+  cursor: grab;
   position: absolute;
   top: 0;
   left: 0;
-  width: 20px;
+  font-size: 16px;
+  width: 16px;
   height: 100%;
   display: flex;
   align-items: center;
-
-  background-color: hsla(0, 100%, 78%, 0.6);
-
+  background-color: rgb(255, 115, 115, 0.6);
   color: rgb(255, 255, 255);
-  cursor: grab;
-  &:active {
-    cursor: grabbing;
+  &:hover {
+    background-color: rgb(255, 115, 115);
   }
 }
 .gutter {
@@ -184,9 +186,9 @@ watch(tempSpan, (newVal) => {
   bottom: 0;
   width: 10px;
   height: 100%;
-  background-color: #ddd;
+  background-color: rgb(128, 128, 128, 0.6);
   &:hover {
-    background-color: #808080;
+    background-color: rgb(128, 128, 128);
   }
 }
 </style>

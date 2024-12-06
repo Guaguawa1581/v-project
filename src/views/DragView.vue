@@ -1,52 +1,37 @@
 <template>
-  <!-- <drag-grid
+  <drag-grid
     :cols="'12 800:24'"
-    v-model:gridItems="gridItems"
+    v-model:grid-items="gridItems"
     :modify-disabled="false"
   >
-    <template v-slot="{ gridWidth, gridCols }">
-      <drag-grid-item
-        v-for="(item, index) in gridItems"
-        :key="item.id"
-        :grid-width="gridWidth"
-        :grid-cols="gridCols"
-        :item="item"
-        :index="index"
-        :span="item.size"
-        @update:span="updateSpan(item, $event)"
-      >
-        {{ item.id }} ({{ item.size }})
-      </drag-grid-item>
-      <div><Button @click="addSpan">PLUS</Button></div>
+    <template #item="{ element }">
+      <div>{{ element }}</div>
     </template>
-  </drag-grid> -->
-  <Vuedrag />
+  </drag-grid>
+  <!-- <Vuedrag /> -->
 </template>
 
 <script setup>
 import { ref, reactive, onMounted, watch } from "vue";
 import Sortable from "sortablejs";
-import DragGrid from "./dragGrid/dragGrid.vue";
-import DragGridItem from "./dragGrid/dragGridItem.vue";
 import Button from "primevue/button";
-
-import Vuedrag from "./Test/Vuedrag.vue";
+import DragGrid from "./dragGrid/dragGrid.vue";
 
 const sortableGrid = ref(null);
 const TOTAL_UNITS = 24;
 
 const gridItems = reactive([
-  { id: 1, size: 8 },
-  { id: 2, size: 8 },
-  { id: 3, size: 8 },
-  { id: 4, size: 3 },
-  { id: 5, size: 4 },
-  { id: 6, size: 5 },
-  { id: 7, size: 6 },
-  { id: 8, size: 7 },
-  { id: 9, size: 8 },
-  { id: 10, size: 3 },
-  { id: 11, size: 4 },
+  { id: 1, span: 8 },
+  { id: 2, span: 8 },
+  { id: 3, span: 8 },
+  { id: 4, span: 3 },
+  { id: 5, span: 4 },
+  { id: 6, span: 5 },
+  { id: 7, span: 6 },
+  { id: 8, span: 7 },
+  { id: 9, span: 8 },
+  { id: 10, span: 3 },
+  { id: 11, span: 4 },
 ]);
 
 const addSpan = () => {

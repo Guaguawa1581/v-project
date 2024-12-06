@@ -8,6 +8,7 @@
         <RouterLink to="/naive">Naive UI</RouterLink>
         <RouterLink to="/barcode">Barcode</RouterLink>
         <RouterLink to="/dragTest">DragTest</RouterLink>
+        <RouterLink to="/slotLoop">SlotLoop</RouterLink>
       </nav>
     </header>
     <div class="container">

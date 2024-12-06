@@ -1,25 +1,46 @@
 <template>
-  <div
-    id="grid-container"
-    ref="sortableGridRef"
-    class="drag-grid-box"
-    :style="{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }"
-  >
-    <slot
-      v-bind="{
-        isDisabled: modifyDisabled,
-        gridWidth: mainGridWidth,
-        gridCols,
-      }"
-    ></slot>
+  <div id="grid-container" ref="sortableGridRef">
+    <draggable
+      tag="div"
+      :disabled="modifyDisabled"
+      :style="{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }"
+      class="drag-grid-box"
+      handle=".grabArea"
+      :ghostClass="'ghost'"
+      :itemKey="'id'"
+      :list="tempList"
+    >
+      <template #item="{ element, index }">
+        <drag-grid-item
+          :index="index"
+          :item="element"
+          v-model:span="element.span"
+          :gird-width="mainGridWidth"
+          :grid-cols="gridCols"
+        >
+          <template #default>
+            <slot name="item" :element="element"></slot>
+          </template>
+        </drag-grid-item>
+      </template>
+      <!-- <template> -->
+
+      <!-- </template> -->
+    </draggable>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, defineProps, defineEmits, watch, computed } from "vue";
-import Sortable from "sortablejs";
-
+import draggable from "vuedraggable";
+import { NIcon } from "naive-ui";
+import { EllipsisVerticalSharp } from "@vicons/ionicons5";
+import DragGridItem from "./dragGridItem.vue";
 const props = defineProps({
+  gridItems: {
+    type: Array,
+    default: () => [],
+  },
   cols: {
     type: [Number, String],
     default: 24,
@@ -29,12 +50,14 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits(["update:grid-sort"]);
+const emit = defineEmits(["update:grid-sort", "gutter-drag-end"]);
 
 const sortableGridRef = ref(null);
 const mainGrid = ref(null);
 const mainGridWidth = ref(0);
-// const gridColsCount = ref(24);
+// const numericGridCols = computed(() => Number(props.gridCols));
+const numericGridCols = ref(24);
+const tempList = ref([]);
 
 const parseResponsivePropValue = (reponsiveProp, activeKeyOrSize) => {
   if (reponsiveProp === undefined || reponsiveProp === null) return undefined;
@@ -64,19 +87,6 @@ const parseResponsivePropValue = (reponsiveProp, activeKeyOrSize) => {
   return Number(activeValue);
 };
 
-// Q: 這個函數是幹嘛的 parseResponsiveProp
-// A: 這個函數是用來解析responsiveProp的
-// responsiveProp是一個字符串，裡面包含了一個或多個key:value對，每個key:value對之間用空格分隔
-// 這個函數會將responsiveProp解析成一個對象，對象的key是key，value是value
-// 如果responsiveProp是一個數字，則返回一個對象，對象的key是空字符串，value是responsiveProp轉成字符串
-// responsiveProp的格式如下：
-//  "12 600:24 "
-// 這個函數會將這個字符串解析成如下對象：
-//  {
-//    "": "12",
-//    "600": "24",
-//  }
-// 這個對象表示在寬度小於600的時候，列數是12，在寬度大於等於600的時候，列數是24
 const parseResponsiveProp = (reponsiveProp) => {
   if (typeof reponsiveProp === "number") {
     return {
@@ -119,16 +129,16 @@ onMounted(() => {
   }
 });
 
-onMounted(() => {
-  mainGrid.value = new Sortable(sortableGridRef.value, {
-    animation: 150,
-    handle: ".grabArea",
-    ghostClass: "ghost",
-    onEnd(event) {
-      emit("update:grid-sort", event);
-    },
-  });
-});
+watch(
+  () => props.gridItems,
+  (newVal) => {
+    tempList.value = newVal;
+    console.log("newVal", tempList.value);
+  },
+  {
+    immediate: true,
+  }
+);
 </script>
 
 <style lang="scss" scoped>
