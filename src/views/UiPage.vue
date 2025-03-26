@@ -214,6 +214,19 @@
           <n-date-picker type="date" :class="isRound ? 'round' : ''" />
         </n-input-group>
       </n-gi>
+      <n-gi :span="18">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-select
+            :class="isRound ? 'round' : ''"
+            placeholder="Select"
+            :options="[
+              { label: 'Option 1', value: 'Option 1' },
+              { label: 'Option 2', value: 'Option 2' },
+            ]"
+            status="error"
+          />
+        </n-input-group>
+      </n-gi>
     </n-grid>
   </n-form>
 </template>
@@ -294,6 +307,7 @@ const handleSubmit = () => {
 <style scoped>
 .n-grid {
   background-color: lightblue;
+  padding: 20px;
 }
 .form-container {
   max-width: 400px;

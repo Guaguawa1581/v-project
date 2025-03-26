@@ -49,7 +49,7 @@ import Button from "primevue/button";
 const barcode = ref("");
 const orderNumber = ref("");
 const submittedBarcode = ref("");
-let scannedData = "";
+let scannedData = ""; // 掃描字元
 let isPageKeydownEnabled = true;
 
 const submitBarcode = () => {
@@ -60,16 +60,25 @@ const submitOrderNumber = () => {
 };
 const inputBarcodeKey = (event) => {
   // console.log("Barcode keydown event:", event);
-  const validKeys = /^[0-9A-Za-z-_\$]$/;
-  if (event.key === "Enter") {
-    // $$$ is password
-    // scannedData = scannedData.split("$$$")[1] || "";
-    barcode.value = scannedData;
+  // 驗證字元
+  const validKeys = /^[!-~]$/;
+  // 四段碼Regex "最多4字元-最多20字元-固定4位數字-任何字元"
+  const woNoPattern = /^.{1,4}-.{1,20}-\d{4}-.+$/;
 
-    scannedData = "";
-  } else if (validKeys.test(event.key)) {
+  if (validKeys.test(event.key)) {
     console.log("Scanned data:", event.key, event);
     scannedData += event.key;
+  } else if (event.key === "Enter") {
+    // $$$ is password
+    // scannedData = scannedData.split("$$$")[1] || "";
+    console.log("finalData", scannedData);
+    if (woNoPattern.test(scannedData)) {
+      barcode.value = scannedData;
+    } else {
+      window.$message.error("條碼格式錯誤");
+    }
+
+    scannedData = "";
   }
 };
 const pageKeydownHandler = (event) => {

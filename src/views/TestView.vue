@@ -53,6 +53,7 @@
         </template>
       </InputOtp>
     </div>
+
     <div class="input-box">
       <input type="text" @paste="onPaste" @copy="(e) => onCopy(e, 1)" />
       <div>.</div>
@@ -62,12 +63,19 @@
       <div>.</div>
       <input type="text" @paste="onPaste" @copy="(e) => onCopy(e, 4)" />
     </div>
-    <div><input type="text" /></div>
+    <div>
+      <label for="" class="me-5" @click="focusCheck">CCCCCTT</label>
+      <n-checkbox ref="testCheck" v-model:checked="isTestCheck"
+        >checkTEst</n-checkbox
+      >
+      <p>Checkbox is {{ isTestCheck ? "checked" : "unchecked" }}</p>
+    </div>
+    <div class="my-5"><input type="text" /></div>
   </div>
 </template>
 <script setup>
 import { ref, nextTick } from "vue";
-import { NDatePicker } from "naive-ui";
+import { NDatePicker, NCheckbox } from "naive-ui";
 import Paginator from "primevue/paginator";
 import InputOtp from "primevue/inputotp";
 import InputMask from "primevue/inputmask";
@@ -80,6 +88,9 @@ const tempData = ref({
 });
 const otpValue = ref("");
 const otpLength = ref(6);
+const testCheck = ref(null);
+const isTestCheck = ref(false);
+
 async function increment() {
   count.value++;
 
@@ -110,6 +121,10 @@ const onPaste = (e) => {
 };
 const onCopy = (e, index) => {
   console.log("onCopy", index, e);
+};
+const focusCheck = () => {
+  isTestCheck.value = !isTestCheck.value;
+  testCheck.value.focus();
 };
 </script>
 <style lang="scss" scoped>

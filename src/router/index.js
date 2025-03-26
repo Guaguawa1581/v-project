@@ -50,6 +50,11 @@ const router = createRouter({
       name: "SlotLoop",
       component: () => import("../views/SlotLoopView.vue"),
     },
+    {
+      path: "/marginCalcu",
+      name: "marginCalculator",
+      component: () => import("../views/MarginCalcuView.vue"),
+    },
   ],
 });
 
