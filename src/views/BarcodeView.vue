@@ -20,8 +20,24 @@
         placeholder="Enter order number"
         @focus="disablePageKeydown"
         @blur="enablePageKeydown"
+        @keydown="justBarcodeReader"
       />
       <Button label="Submit" @click="submitOrderNumber" />
+    </div>
+    <div class="d-flex">
+      <InputText
+        class="me-2"
+        v-model="tempBarcodeData"
+        placeholder="Enter number"
+        @keydown.stop="justBarcodeReader"
+      />
+      <Button
+        severity="help"
+        label="判斷鍵盤or掃描器"
+        @click="clearTestBarcode"
+      />
+
+      <div class="ms-5">SCANNED: {{ tempShowBarcode }}</div>
     </div>
     <Button label="Submit" @click="submitBarcode" />
     <Button
@@ -95,6 +111,49 @@ const focusHandler = () => {
 };
 const blurHandler = () => {
   console.log("Blur from scanner area");
+};
+
+// 透過輸入時間判斷是否是條碼掃描器輸入
+const tempShowBarcode = ref("");
+const tempBarcodeData = ref("");
+
+let lastTimestamp = 0;
+let timer = null;
+// 門檻值：假設人工輸入時間間隔通常大於 50ms，條碼機連續輸入間隔會遠小於此數值
+const threshold = 50; // 毫秒
+
+const justBarcodeReader = (event) => {
+  const now = Date.now();
+  if (lastTimestamp === 0) {
+    lastTimestamp = now;
+  }
+  const delta = now - lastTimestamp;
+  console.log("delta", delta);
+  if (delta <= threshold) {
+    const validKeys = /^[!-~]$/;
+
+    if (validKeys.test(event.key)) {
+      // console.log("test Scanned data:", event.key, event);
+      tempShowBarcode.value += event.key;
+    } else if (event.key === "Enter") {
+      // $$$ is password
+      // scannedData = scannedData.split("$$$")[1] || "";
+      lastTimestamp = 0;
+      tempBarcodeData.value = "";
+      console.log("enter end");
+    }
+  } else {
+    tempShowBarcode.value = "";
+  }
+
+  lastTimestamp = now;
+};
+const clearTestBarcode = () => {
+  tempShowBarcode.value = "";
+  tempBarcodeData.value = "";
+  testScannedData = ""; // 掃描字元
+  lastTimestamp = 0;
+  clearTimeout(timer);
 };
 
 onMounted(() => {

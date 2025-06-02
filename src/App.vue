@@ -10,6 +10,7 @@
         <RouterLink to="/dragTest">DragTest</RouterLink>
         <RouterLink to="/slotLoop">SlotLoop</RouterLink>
         <RouterLink to="/marginCalcu">MarginCalculator</RouterLink>
+        <RouterLink to="/chart">Chart</RouterLink>
       </nav>
     </header>
     <div class="container">

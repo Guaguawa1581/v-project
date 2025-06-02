@@ -55,6 +55,11 @@ const router = createRouter({
       name: "marginCalculator",
       component: () => import("../views/MarginCalcuView.vue"),
     },
+    {
+      path: "/chart",
+      name: "Chart",
+      component: () => import("../views/ChartView.vue"),
+    },
   ],
 });
 
