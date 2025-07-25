@@ -71,14 +71,29 @@
       <p>Checkbox is {{ isTestCheck ? "checked" : "unchecked" }}</p>
     </div>
     <div class="my-5"><input type="text" /></div>
+    <div>
+      <h3>Textarea</h3>
+      <Textarea v-model="textareaValue" rows="5" cols="60" />
+      <div>
+        <Button @click="sendSql">Submit</Button>
+      </div>
+      <p>
+        Textarea value:
+        <span class="text-danger">{{ JSON.stringify(textareaValue) }}</span>
+      </p>
+    </div>
   </div>
 </template>
 <script setup>
 import { ref, nextTick } from "vue";
 import { NDatePicker, NCheckbox } from "naive-ui";
+import Button from "primevue/button";
 import Paginator from "primevue/paginator";
 import InputOtp from "primevue/inputotp";
 import InputMask from "primevue/inputmask";
+import Textarea from "primevue/textarea";
+import axios from "axios";
+
 const count = ref(0);
 const date = ref("2024-12-31T00:00:00");
 const tempData = ref({
@@ -90,7 +105,7 @@ const otpValue = ref("");
 const otpLength = ref(6);
 const testCheck = ref(null);
 const isTestCheck = ref(false);
-
+const textareaValue = ref("");
 async function increment() {
   count.value++;
 
@@ -126,6 +141,23 @@ const focusCheck = () => {
   isTestCheck.value = !isTestCheck.value;
   testCheck.value.focus();
 };
+const sendSql = async () => {
+  try {
+    const res = await axios.post(
+      "https://localhost:44314/api/RMS/Admin/Kanban/GetColsBySQL",
+      {
+        query: textareaValue.value,
+      }
+    );
+    if (res.data?.messageBox) {
+      console.log(res);
+      window.$message.success(res.data.messageBox.message);
+    }
+  } catch (e) {
+    console.log(e);
+    window.$message.error(e.response?.data?.messageBox.message || "發生錯誤");
+  }
+};
 </script>
 <style lang="scss" scoped>
 .btnBox {
@@ -135,6 +167,7 @@ const focusCheck = () => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 50px;
 }
 .custom-otp-input {
   width: 48px;
@@ -178,5 +211,8 @@ const focusCheck = () => {
     border: none;
     outline: none;
   }
+}
+.pre-line {
+  white-space: pre-line;
 }
 </style>

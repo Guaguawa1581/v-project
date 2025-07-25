@@ -227,11 +227,51 @@
           />
         </n-input-group>
       </n-gi>
+      <n-gi :span="18">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <n-input
+            v-model:value="localTargetObjectTest.description"
+            type="textarea"
+            placeholder="Auto Resize"
+            :autosize="{ minRows: 6 }"
+          />
+        </n-input-group>
+      </n-gi>
+
+      <n-gi :span="18">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <div
+            class="text-danger"
+            style="
+              white-space: pre-wrap;
+              background: #fff;
+              padding: 12px;
+              border: 1px solid #ccc;
+              width: 100%;
+            "
+          >
+            {{ JSON.stringify(localTargetObjectTest.description) }}
+          </div>
+        </n-input-group>
+      </n-gi>
+      <n-gi :span="6">
+        <n-button type="success" @click="sendDescription"
+          >送出 description</n-button
+        >
+      </n-gi>
+      <n-gi :span="18">
+        <n-input-group class="input_size_free custom_inputgroup">
+          <div class="text-white bg-danger p-2">
+            {{ desRes }}
+          </div>
+        </n-input-group>
+      </n-gi>
     </n-grid>
   </n-form>
 </template>
 
 <script setup>
+import axios from "axios";
 import { h, ref, markRaw } from "vue";
 import {
   NForm,
@@ -267,6 +307,7 @@ const localTargetObjectTest = ref({
   firstName: "",
   lastName: "",
   email: "",
+  description: "",
 });
 const dynamicIcon = markRaw(Anchor);
 const testSlots = ref({
@@ -292,6 +333,7 @@ const rules = {
     trigger: "blur",
   },
 };
+const desRes = ref("");
 const handleSubmit = () => {
   formRef.value.validate((err) => {
     if (!err) {
@@ -301,6 +343,29 @@ const handleSubmit = () => {
       window.$message.warning("Please fill in the form correctly");
     }
   });
+};
+const sendDescription = async () => {
+  try {
+    const res = await axios.post(
+      "https://192.168.100.87:5004/api/RMS/Admin/Kanban/GetColsBySQL",
+      {
+        query: localTargetObjectTest.value.description,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("✅ API response:", res.data);
+    window.$message.success("送出成功");
+    desRes.value = res.data;
+  } catch (err) {
+    console.error("❌ API error:", err);
+    window.$message.error("送出失敗");
+    desRes.value = err.response?.data?.messageBox.message || "發生錯誤";
+  }
 };
 </script>
 
